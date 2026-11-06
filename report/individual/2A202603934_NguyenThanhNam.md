@@ -86,6 +86,7 @@ Nguyên nhân là BoW chủ yếu dựa vào sự xuất hiện của từ khóa
 **Case #10 --- Tưởng spam nhưng không phải (`ham_looks_spam`)**
 > Call 07700 900123 to reach me, my old phone died. New number!
 Đây là tin nhắn hợp lệ thông báo đổi số điện thoại. Tuy nhiên, nội dung có số điện thoại, từ "Call" và dấu chấm than nên dễ bị nhầm thành spam.
+
 **Case #12 --- Spam giọng tự nhiên (`natural_spam`)**
 > hi there, sorry to bother you, my friend gave me your number, I'm new in town and looking for someone to chat with, check my profile at meetlocal.club
 Đây là tin spam được viết bằng giọng lịch sự, thân thiện và không sử dụng những từ khóa quảng cáo phổ biến. Người đọc cần chú ý đến đường link và mục đích dụ người nhận truy cập.
