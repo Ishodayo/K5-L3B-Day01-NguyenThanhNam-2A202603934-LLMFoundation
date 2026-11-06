@@ -1,0 +1,231 @@
+{
+ "seed": 8760,
+ "predictions": {
+  "F1 ~0.85": {
+   "text": "precision có thể cao hơn recall vì dữ liệu mất cân bằng, spam rất ít. Mô hình có thể bỏ sót một số tin spam (FN), khiến recall giảm.",
+   "time": "12:04:13"
+  },
+  "ml_f1": {
+   "text": "F1 ~0.85, precision có thể cao hơn recall vì dữ liệu mất cân bằng, spam rất ít. Mô hình có thể bỏ sót một số tin spam (FN), khiến recall giảm.",
+   "time": "12:05:02"
+  },
+  "ml_lr": {
+   "text": "lr=0.001: loss giảm rất chậm; lr=50: loss có thể dao động mạnh và có thể không hội tụ.",
+   "time": "12:12:03"
+  },
+  "dl_curve": {
+   "text": "(1) val loss không giảm mãi do overfitting, (2) MLP sẽ hơn logistic regression ở phần 1 về F1 do học được các mối quan hệ phức tạp",
+   "time": "12:32:40"
+  },
+  "dl_relu": {
+   "text": "nếu bỏ ReLU, mạng hai lớp linear liên tiếp tương đương một lớp linear, F1 giảm do mô hình mất khả năng học quan hệ phi tuyến",
+   "time": "12:40:21"
+  },
+  "emb_search": {
+   "text": "kết quả gần nhất là spam",
+   "time": "13:02:00"
+  },
+  "emb_tricky": {
+   "text": "Encoder + LogReg đoán đúng nhiều hơn",
+   "time": "14:48:29"
+  },
+  "llm_models": {
+   "text": "Dự đoán gemini-3.8-flash có F1 cao hơn gemini-3.5-flash-lite, chi phí cao hơn khoảng 1,5–2,5 lần và có thể vượt Embedding + LogReg (3b).",
+   "time": "15:17:04"
+  },
+  "llm_fewshot": {
+   "text": "F1 dự kiến tăng, chi phí mỗi tin tăng khoảng 2–3 lần",
+   "time": "15:32:56"
+  },
+  "tradeoff": {
+   "text": "Trên đường Pareto: BoW + LogReg, BoW + MLP, MiniLM + LogReg, Gemini nhỏ zero-shot; vượt SLA 50 ms: cả 3 mô hình MiniLM và cả 3 mô hình Gemini.",
+   "time": "15:59:33"
+  },
+  "hard_eval": {
+   "text": "(1) Accuracy dự đoán sẽ giảm so với tập test thường; (2) BoW khó nhất với nhóm né từ khóa, LLM khó nhất với nhóm prompt injection.",
+   "time": "16:02:25"
+  }
+ },
+ "checks": {
+  "1.1 vectorize": true,
+  "1.2 sigmoid / predict_proba": true,
+  "1.3 train_logreg": true,
+  "1.4 metrics": true,
+  "2.1 build_mlp": true,
+  "2.2 train_mlp": true,
+  "3.1–3.2 cosine / top_k_similar": true,
+  "3.3 knn_predict": true,
+  "4.2–4.3 prompt / parse_label": true,
+  "4.1 + 4.4 call_openai / llm_classify_batch": true,
+  "tính tay: baseline_accuracy": false,
+  "tính tay: sigmoid_0": false,
+  "tính tay: f1_example": false,
+  "tính tay: cosine_example": false,
+  "tính tay: llm_cost_per_day": false
+ },
+ "experiments": [
+  {
+   "key": "ml_f1",
+   "time": "12:05:04"
+  },
+  {
+   "key": "ml_lr",
+   "time": "12:12:05"
+  },
+  {
+   "key": "dl_curve",
+   "time": "12:32:43"
+  },
+  {
+   "key": "dl_relu",
+   "time": "12:40:22"
+  },
+  {
+   "key": "emb_search",
+   "time": "13:02:02"
+  },
+  {
+   "key": "emb_tricky",
+   "time": "14:48:37"
+  },
+  {
+   "key": "emb_tricky",
+   "time": "14:48:53"
+  },
+  {
+   "key": "llm_models",
+   "time": "15:17:07"
+  },
+  {
+   "key": "llm_models",
+   "time": "15:23:25"
+  },
+  {
+   "key": "llm_fewshot",
+   "time": "15:32:57"
+  },
+  {
+   "key": "llm_models",
+   "time": "15:45:33"
+  },
+  {
+   "key": "llm_models",
+   "time": "15:49:02"
+  },
+  {
+   "key": "llm_fewshot",
+   "time": "15:52:37"
+  },
+  {
+   "key": "tradeoff",
+   "time": "15:59:34"
+  },
+  {
+   "key": "hard_eval",
+   "time": "16:02:27"
+  },
+  {
+   "key": "hard_eval",
+   "time": "16:07:11"
+  }
+ ],
+ "challenge": 0,
+ "results": {
+  "1. BoW + LogReg (tự code)": {
+   "accuracy": 0.9651612903225807,
+   "precision": 0.9864864864864865,
+   "recall": 0.7373737373737373,
+   "f1": 0.8439306358381503,
+   "f1_SUB": 0.8571428571428571,
+   "train_s": 7.326870125998539,
+   "msg_per_s": 30780.82574398452,
+   "p50_ms": 0.04645799890568014,
+   "p95_ms": 0.07474625072063644,
+   "usd_per_1k": 0.0
+  },
+  "2. BoW + MLP (deep learning)": {
+   "accuracy": 0.9780645161290322,
+   "precision": 0.9555555555555556,
+   "recall": 0.8686868686868687,
+   "f1": 0.9100529100529101,
+   "f1_SUB": 0.9473684210526316,
+   "train_s": 7.580568121997203,
+   "msg_per_s": 43809.22265377108,
+   "p50_ms": 0.17465800010540988,
+   "p95_ms": 0.2895780504331923,
+   "usd_per_1k": 0.0
+  },
+  "3a. Encoder (MiniLM) + kNN": {
+   "accuracy": 0.983225806451613,
+   "precision": 0.8981481481481481,
+   "recall": 0.9797979797979798,
+   "f1": 0.9371980676328502,
+   "f1_SUB": 1.0,
+   "train_s": 83.96834019299786,
+   "msg_per_s": 30.07882704488774,
+   "p50_ms": 48.401432501123054,
+   "p95_ms": 71.596399549162,
+   "usd_per_1k": 0.0
+  },
+  "3b. Encoder (MiniLM) + LogReg": {
+   "accuracy": 0.9935483870967742,
+   "precision": 0.9795918367346939,
+   "recall": 0.9696969696969697,
+   "f1": 0.9746192893401016,
+   "f1_SUB": 1.0,
+   "train_s": 84.43994072299756,
+   "msg_per_s": 46.803867695131274,
+   "p50_ms": 39.48823899918352,
+   "p95_ms": 62.615647899838216,
+   "usd_per_1k": 0.0
+  },
+  "3c. Encoder (MiniLM) + MLP head": {
+   "accuracy": 0.9896774193548387,
+   "precision": 0.9595959595959596,
+   "recall": 0.9595959595959596,
+   "f1": 0.9595959595959596,
+   "f1_SUB": 1.0,
+   "train_s": 85.08482897399881,
+   "msg_per_s": 45.76880510592275,
+   "p50_ms": 40.68947800078604,
+   "p95_ms": 62.718464648605725,
+   "usd_per_1k": 0.0
+  },
+  "4a. LLM nhỏ zero-shot": {
+   "accuracy": 0.975,
+   "precision": 0.9523809523809523,
+   "recall": 1.0,
+   "f1": 0.975609756097561,
+   "f1_SUB": 0.975609756097561,
+   "train_s": 0.0,
+   "msg_per_s": 0.7734576627028465,
+   "p50_ms": 1282.4101550013438,
+   "p95_ms": 1582.264450950788,
+   "usd_per_1k": 0.022533333333333336
+  },
+  "4b. LLM lớn zero-shot": {
+   "accuracy": 1.0,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "f1_SUB": 1.0,
+   "train_s": 0.0,
+   "msg_per_s": 0.3130400407719861,
+   "p50_ms": 2998.505401497823,
+   "p95_ms": 5533.845265049785,
+   "usd_per_1k": 0.053
+  },
+  "4c. LLM nhỏ few-shot": {
+   "accuracy": 1.0,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "f1_SUB": 1.0,
+   "train_s": 0.0,
+   "msg_per_s": 0.8977566284755273,
+   "p50_ms": 1133.2270305010752,
+   "p95_ms": 1391.3385378977182,
+   "usd_per_1k": 0.06293333333333334
+  }
+ }
+}
